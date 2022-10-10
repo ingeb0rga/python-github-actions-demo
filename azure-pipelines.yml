@@ -9,29 +9,31 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-# - script: echo Hello, world!
+stages:
+- stage: Run and Test
+  jobs:
+    - job: Setup_Python
+      steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.10.7'
+            addToPath: true
+            architecture: 'x64'
+          # displayName: Setup Python
+    - job: Run_calculator
+      steps:
+        - task: PythonScript@0
+          inputs:
+            scriptSource: 'filePath'
+            scriptPath: 'main.py'
+            arguments: 'add 3 5'
+          # displayName: 'Run calculator'
+    - job: Run_tests
+      steps:
+        - script: python3 -u -m unittest tests/tests.py
+          # displayName: 'Run tests'
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.10.7'
-    addToPath: true
-    architecture: 'x64'
-  displayName: Setup Python
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'filePath'
-    scriptPath: 'main.py'
-    arguments: 'add 3 5'
-  displayName: 'Run calculator'
-
-
-- script: python3 -u -m unittest tests/tests.py
-  displayName: 'Run tests'
-
-# - task: PythonScript@0
-#   inputs:
-#     scriptSource: 'filePath'
-#     scriptPath: 'python3 -u -m unittest tests/tests.py'
-#     # arguments: ''
-#   displayName: 'Run tests'
+# - stage: Build
+#   jobs:
+#     - job: Echo
+#       script: echo "Hello"
