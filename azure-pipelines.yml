@@ -25,9 +25,13 @@ steps:
     arguments: 'add 3 5'
   displayName: 'Run calculator'
 
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'filePath'
-    scriptPath: 'python3 -u -m unittest tests/tests.py'
-    # arguments: ''
+
+- script: python3 -u -m unittest tests/tests.py
   displayName: 'Run tests'
+
+# - task: PythonScript@0
+#   inputs:
+#     scriptSource: 'filePath'
+#     scriptPath: 'python3 -u -m unittest tests/tests.py'
+#     # arguments: ''
+#   displayName: 'Run tests'
