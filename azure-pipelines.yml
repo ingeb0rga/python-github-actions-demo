@@ -36,7 +36,7 @@ stages:
           # displayName: 'Run tests'
 
 - stage: Build
-  dependsOn: un_and_Test
+  dependsOn: Run_and_Test
   jobs:
     - job: Echo
       steps:
