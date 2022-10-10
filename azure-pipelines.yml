@@ -21,6 +21,7 @@ stages:
             architecture: 'x64'
           # displayName: Setup Python
     - job: Run_calculator
+      dependsOn: Setup_Python
       steps:
         - task: PythonScript@0
           inputs:
@@ -29,6 +30,7 @@ stages:
             arguments: 'add 3 5'
           # displayName: 'Run calculator'
     - job: Run_tests
+      dependsOn: Run_calculator
       steps:
         - script: python3 -u -m unittest tests/tests.py
           # displayName: 'Run tests'
