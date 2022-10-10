@@ -35,7 +35,9 @@ stages:
         - script: python3 -u -m unittest tests/tests.py
           # displayName: 'Run tests'
 
-# - stage: Build
-#   jobs:
-#     - job: Echo
-#       script: echo "Hello"
+- stage: Build
+  dependsOn: un_and_Test
+  jobs:
+    - job: Echo
+      steps:
+        - script: echo "Hello"
