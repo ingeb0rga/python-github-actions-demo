@@ -21,7 +21,7 @@ steps:
   inputs:
     scriptSource: 'filePath'
     scriptPath: 'main.py'
-    arguments: '3 5 add'
+    arguments: 'add 3 5'
   displayName: 'Run a one-line script'
 
 # - script: |
