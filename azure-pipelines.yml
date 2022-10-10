@@ -17,14 +17,17 @@ steps:
     versionSpec: '3.10.7'
     addToPath: true
     architecture: 'x64'
+  displayName: Setup Python
 - task: PythonScript@0
   inputs:
     scriptSource: 'filePath'
     scriptPath: 'main.py'
     arguments: 'add 3 5'
-  displayName: 'Run a one-line script'
+  displayName: 'Run calculator'
 
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: 'python3 -u -m unittest tests/tests.py'
+    # arguments: ''
+  displayName: 'Run tests'
