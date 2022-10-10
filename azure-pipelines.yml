@@ -10,34 +10,33 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Run_and_Test
+- stage: Setup_Run_Test
   jobs:
-    - job: Setup_Python
+    - job: Setup_Run_Test
       steps:
         - task: UsePythonVersion@0
           inputs:
-            versionSpec: '3.10.7'
+            versionSpec: '3.10'
             addToPath: true
             architecture: 'x64'
-          # displayName: Setup Python
-    - job: Run_calculator
-      dependsOn: Setup_Python
-      steps:
+          displayName: Setup Python'
+
         - task: PythonScript@0
           inputs:
             scriptSource: 'filePath'
             scriptPath: 'main.py'
             arguments: 'add 3 5'
-          # displayName: 'Run calculator'
-    - job: Run_tests
-      dependsOn: Run_calculator
-      steps:
+          displayName: 'Run calculator'
+
         - script: python3 -u -m unittest tests/tests.py
-          # displayName: 'Run tests'
+          displayName: 'Run tests'
+
 
 - stage: Build
-  dependsOn: Run_and_Test
+  dependsOn: Setup_Run_Test
   jobs:
     - job: Echo
       steps:
         - script: echo "Hello"
+
+    
