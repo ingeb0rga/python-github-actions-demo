@@ -9,6 +9,12 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  tag: '$(Build.BuildId)'
+  imageRepo: 'ingeb0rga/azuredevops'
+  dockerFilePath: '**/Dockerfile'
+  dockerRegistry: 'dockerhub'
+
 stages:
 - stage: Setup_Run_Test
   jobs:
@@ -42,7 +48,10 @@ stages:
         - task: Docker@2
           displayName: Build and push docker container
           inputs:
-            containerRegistry: 'dockerhub'
-            repository: 'ingeb0rga/azuredevops'
+            containerRegistry: $(dockerRegistry)
+            repository: $(imageRepo)
             command: 'buildAndPush'
-            Dockerfile: '**/Dockerfile'
+            Dockerfile: $(dockerFilePath)
+            tags: 
+              latest
+              $(tag)
