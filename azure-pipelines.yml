@@ -32,17 +32,17 @@ stages:
           displayName: 'Run tests'
 
 
-# - stage: Build
-#   dependsOn: Setup_Run_Test
-#   jobs:
-#     - job: Echo
-#       steps:
-#         # - script: echo "Hello"
+- stage: Build
+  dependsOn: Setup_Run_Test
+  jobs:
+    - job: Echo
+      steps:
+        # - script: echo "Hello"
 
-#         - task: Docker@2
-#           inputs:
-#             containerRegistry: 'dockerhub'
-#             repository: 'azuredevops'
-#             command: 'buildAndPush'
-#             Dockerfile: '**/Dockerfile'
-#           displayName: Build and push docker container
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'dockerhub'
+            repository: 'azuredevops'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
+          displayName: Build and push docker container
