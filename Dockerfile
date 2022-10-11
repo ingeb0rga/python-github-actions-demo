@@ -2,6 +2,6 @@ FROM python:3.9
 
 ADD *.py /
 
-ADD test/*.py /tests/
+ADD tests/*.py /tests/
 
 ENTRYPOINT ["python", "./main.py"]
