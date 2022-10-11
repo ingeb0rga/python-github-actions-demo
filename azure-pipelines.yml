@@ -15,18 +15,20 @@ stages:
     - job: Setup_Run_Test
       steps:
         - task: UsePythonVersion@0
+          displayName: Setup Python'
           inputs:
             versionSpec: '3.10'
             addToPath: true
             architecture: 'x64'
-          displayName: Setup Python'
+
 
         - task: PythonScript@0
+          displayName: 'Run calculator'        
           inputs:
             scriptSource: 'filePath'
             scriptPath: 'main.py'
             arguments: 'add 3 5'
-          displayName: 'Run calculator'
+
 
         - script: python3 -u -m unittest tests/tests.py
           displayName: 'Run tests'
@@ -38,9 +40,9 @@ stages:
     - job: Container_build
       steps:
         - task: Docker@2
+          displayName: Build and push docker container
           inputs:
             containerRegistry: 'dockerhub'
             repository: 'ingeb0rga/azuredevops'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
-          displayName: Build and push docker container
