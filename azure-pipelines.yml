@@ -52,6 +52,6 @@ stages:
             repository: $(imageRepo)
             command: 'buildAndPush'
             Dockerfile: $(dockerFilePath)
-            tags: 
+            tags: |
               latest
               $(tag)
